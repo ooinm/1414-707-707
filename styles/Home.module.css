@@ -1,0 +1,61 @@
+.leftImage {
+  float:left;
+  width:150px;
+  height:155px;
+  background-color:black;
+  margin-right:20px
+}
+.centerImageBlue {
+  float:left;
+  width:150px;
+  height:155px;
+  background-color:rgb(25, 0, 255);
+  margin-right:20px
+}
+
+.centerImageRed {
+  float:left;
+  width:150px;
+  height:155px;
+  background-color:rgb(255, 0, 0);
+  margin-right:20px
+}
+.centerImageBlack {
+  float:left;
+  width:150px;
+  height:155px;
+  background-color:rgb(3, 3, 3);
+  margin-right:20px;
+  
+}
+
+.rightImage {
+  float:right;
+  width:150px;
+  height:155px;
+  background-color:black;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 0 0 1rem;
+  line-height: 1.15;
+  font-size: 1.6rem;
+}
+
+
+
+
+
+
+
+
+
