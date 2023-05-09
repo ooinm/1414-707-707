@@ -79,7 +79,10 @@ setIndex(rand)
   
 function checkSpeed(){
 if(input == 's'){
-  setStop(1)}
+  if (ID!=''){
+    setStop(1)
+  }
+  }
 else if(input == 'p'){
     setStop(0)}
 else if(input == 'u'){
