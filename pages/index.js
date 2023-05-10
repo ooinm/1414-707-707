@@ -5,7 +5,7 @@ import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
 
 export default function labelMachine({size=150}) {
-
+ 
   const [index, setIndex] = useState(1);
   const [speed, setSpeed] = useState(1600);
   const [stop, setStop] = useState(0);
@@ -24,11 +24,9 @@ if (k=='0'||k=='1'||k=='2'||k=='3'||k=='4'||k=='5'||k=='6'
   ||k=='7'||k=='8'||k=='9'||k=='s'||k=='p'||k=='u'||k=='d'){
   setInput(k);}
 else if (k == 'f'){
-        setInput(7);}
-else if (k == 'g'){
-          setInput(8);}
+        setInput(5);}
 else if (k == 'h'){
-        setInput(9);}      
+          setInput(6);}
 else {
 setInput('-')}       
   }, []);
@@ -46,7 +44,9 @@ return () => {
     if (stop === 1)
     {
       setCounter((counter)=> counter+1);
-      selectRandomImage();
+      
+    
+      setIndex((index)=>index+1)
     }
       setCenterColor(styles.centerImageBlack)
     
@@ -74,14 +74,13 @@ return () => {
 
 function selectRandomImage(){
   let rand = Math.floor(Math.random() * 60000);
-setIndex(rand)
+  setIndex(rand)
 }
   
 function checkSpeed(){
 if(input == 's'){
-  if (ID!=''){
     setStop(1)
-  }
+    selectRandomImage(0)
   }
 else if(input == 'p'){
     setStop(0)}
@@ -114,9 +113,17 @@ function getID(){
 
 function start(){
   getID()
-  selectRandomImage()
-  setStop(1)
-  placeCursor()
+  console.log(ID)
+  if(ID==''){
+    alert("Please provide your name to start, it will be your labeller ID.")
+    getID()
+  }
+  else {
+    selectRandomImage()
+    setStop(1)
+    placeCursor()
+  }
+ 
   } 
 
   function placeCursor(){
@@ -156,16 +163,16 @@ function start(){
         />
     </label>
   
-    <hr />
-    <button onClick={start}>START</button>
+    
+    {/* <button onClick={start}>START</button> */}
    
     
     {/* <button onClick={fetchData}> fetchData</button>
     <button onClick={saveData}> saveData</button> */}
 
     <ul>
+    <li>s - start</li>
   <li>p - pause</li>
-  <li>s - proceed</li>
   <li>u - speed +</li>
   <li>d - speed -</li>
     </ul>
@@ -174,8 +181,10 @@ function start(){
     <p>newLabels: {allLabels.map(x=>x)}</p> */}
   
       <p>Score: {score} correct labels from {counter} images </p>
-      <p>f=7, g=8, h=9</p>
+      <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
+      
+    
      
      </div> 
   );
