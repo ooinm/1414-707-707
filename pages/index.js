@@ -24,11 +24,9 @@ if (k=='0'||k=='1'||k=='2'||k=='3'||k=='4'||k=='5'||k=='6'
   ||k=='7'||k=='8'||k=='9'||k=='s'||k=='p'||k=='u'||k=='d'){
   setInput(k);}
 else if (k == 'f'){
-        setInput(7);}
-else if (k == 'g'){
-          setInput(8);}
+        setInput(5);}
 else if (k == 'h'){
-        setInput(9);}      
+        setInput(6);}      
 else {
 setInput('-')}       
   }, []);
@@ -174,7 +172,7 @@ function start(){
     <p>newLabels: {allLabels.map(x=>x)}</p> */}
   
       <p>Score: {score} correct labels from {counter} images </p>
-      <p>f=7, g=8, h=9</p>
+      <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
      
      </div> 
