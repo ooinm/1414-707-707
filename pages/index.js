@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css';
 export default function labelMachine({size=150}) {
  
   const [index, setIndex] = useState(1);
-  const [speed, setSpeed] = useState(1600);
+  const [speed, setSpeed] = useState(1200);
   const [stop, setStop] = useState(0);
   const [centerColor, setCenterColor] = useState(styles.centerImageRed)
   const [input,setInput] = useState("");
@@ -44,9 +44,11 @@ return () => {
     if (stop === 1)
     {
       setCounter((counter)=> counter+1);
+      setIndex((index)=>index+1);
+  
       
-    
-      setIndex((index)=>index+1)
+     
+
     }
       setCenterColor(styles.centerImageBlack)
     
@@ -76,26 +78,42 @@ function selectRandomImage(){
   let rand = Math.floor(Math.random() * 60000);
   setIndex(rand)
 }
+
+function counterSpeed(){
+  if (counter>30 && counter<50){
+    setSpeed(950)
+  }
+  else if (counter>50 && counter<100){
+    setSpeed(900)
+  }
+  else if (counter>150){
+    setSpeed(1000)
+  }
+
+}
   
 function checkSpeed(){
 if(input == 's'){
     setStop(1)
-    selectRandomImage(0)
+    selectRandomImage()
+
   }
 else if(input == 'p'){
     setStop(0)}
 else if(input == 'u'){
   setSpeed(speed-100)}
 else if(input== 'd'){
-    setSpeed(speed+100);}
+    setSpeed(speed+100);
+    }
 
 else if(input!=correctLabel){
   // setSpeed(speed+100)
   setCenterColor(styles.centerImageRed)}
 else if (input==correctLabel){
-  setSpeed(speed-50)
+  // setSpeed(speed-50)
   setScore(score+1)
   setCenterColor(styles.centerImageBlue)}
+
 }
 
 function stopNow(){
@@ -104,6 +122,7 @@ function stopNow(){
 
 function collectLabels(){
   setAllLabels([allLabels,input]);
+  counterSpeed()
   saveData()
 }
 
