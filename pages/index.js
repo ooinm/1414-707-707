@@ -171,7 +171,7 @@ function start(){
     <button onClick={saveData}> saveData</button> */}
 
     <ul>
-    <li>s - start</li>
+  <li>s - start</li>
   <li>p - pause</li>
   <li>u - speed +</li>
   <li>d - speed -</li>
@@ -183,7 +183,7 @@ function start(){
       <p>Score: {score} correct labels from {counter} images </p>
       <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
-      
+      <p>testWorkflowSucces?</p>
     
      
      </div> 
