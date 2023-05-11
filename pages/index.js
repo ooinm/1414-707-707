@@ -183,7 +183,7 @@ function start(){
       <p>Score: {score} correct labels from {counter} images </p>
       <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
-      <p>testWorkflowSucces?</p>
+     
     
      
      </div> 
