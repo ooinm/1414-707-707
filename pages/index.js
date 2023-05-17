@@ -56,9 +56,11 @@ return () => {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         start();
-        setCountDown(0);
-      }
-    }
+        setCountDown(0);}
+     }
+     else {
+      setCountDown(3)
+     }
     }, speed);
     return () => clearInterval(interval);
   }, [stop,speed,countDown]);
