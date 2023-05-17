@@ -4,6 +4,7 @@ import Image from 'next/image';
 import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
 
+
 export default function labelMachine({size=150}) {
  
   const [index, setIndex] = useState(1);
@@ -52,18 +53,29 @@ return () => {
      
       if (stop === 1)
     {
-      setCounter((c)=> c+1);
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         start();
-        setCountDown(0);}
+        setCountDown(0);
+        setCounter((c)=> c+1);
+        
+        if (speed>900){
+          setSpeed(speed -5)
+        }
+      
+        if (score>10){
+          setSpeed(1500)
+          setScore(0)
+        }  
+      }
+
      }
      else {
       setCountDown(3)
      }
     }, speed);
     return () => clearInterval(interval);
-  }, [stop,speed,countDown]);
+  }, [stop,speed,counter,countDown,score]);
   
   const fetchData = async () => {
     const response = await fetch('/api/labels')
@@ -89,8 +101,8 @@ function selectRandomImage(){
 }
 
 function counterSpeed(){
-  if (counter>30 && counter<50){
-    setSpeed(950)
+  if (counter==2){
+    setSpeed(speed - 200)
   }
   else if (counter>50 && counter<100){
     setSpeed(900)
@@ -113,13 +125,13 @@ else if(input == 'u'){
 else if(input== 'd'){
     setSpeed(speed+100);
     }
-
 else if(input!=correctLabel){
-  // setSpeed(speed+100)
+ 
+  setScore(score+1)
+
   setCenterColor(styles.centerImageRed)}
 else if (input==correctLabel){
-  // setSpeed(speed-50)
-  setScore(score+1)
+  
   setCenterColor(styles.centerImageBlue)}
 
 }
@@ -198,11 +210,9 @@ function start(){
 {/*    
     <p>newLabels: {allLabels.map(x=>x)}</p> */}
   
-      <p>Score: {score} correct labels from {counter} images </p>
       <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
      
-    
      
      </div> 
   );
