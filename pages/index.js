@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState,useEffect,useCallback} from 'react';
+import { useState,useEffect, useRef,useCallback} from 'react';
 import Image from 'next/image';
 import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
@@ -9,14 +9,18 @@ export default function labelMachine({size=150}) {
   const [index, setIndex] = useState(1);
   const [speed, setSpeed] = useState(1200);
   const [stop, setStop] = useState(0);
-  const [centerColor, setCenterColor] = useState(styles.centerImageRed)
+  const [centerColor, setCenterColor] = useState(styles.centerImageBlack)
   const [input,setInput] = useState("");
   const [allLabels, setAllLabels] = useState([]);
   const [counter, setCounter] = useState(0);
   const [score,setScore] = useState(0)
   const [ID,setID] = useState("")
+  const [countDown, setCountDown] = useState(3);
   
   const correctLabel = correctLabels[index]
+
+  const counterRef = useRef(0);
+ 
    
   const keyPress = useCallback((e) => {
 let k=e.key
@@ -31,7 +35,7 @@ else {
 setInput('-')}       
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     // add and remove event listener
     document.addEventListener('keydown', keyPress);
 return () => {
@@ -39,22 +43,25 @@ return () => {
     };
   }, [keyPress]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-    if (stop === 1)
-    {
-      setCounter((counter)=> counter+1);
-      setIndex((index)=>index+1);
+ 
   
-      
+  
+  useEffect(() => {
+   
+    const interval = setInterval(() => {
      
-
+      if (stop === 1)
+    {
+      setCounter((c)=> c+1);
+      setCountDown((cD)=> cD-1);
+      if (countDown==0){
+        start();
+        setCountDown(0);
+      }
     }
-      setCenterColor(styles.centerImageBlack)
-    
     }, speed);
     return () => clearInterval(interval);
-  }, [stop,speed]);
+  }, [stop,speed,countDown]);
   
   const fetchData = async () => {
     const response = await fetch('/api/labels')
@@ -94,8 +101,7 @@ function counterSpeed(){
   
 function checkSpeed(){
 if(input == 's'){
-    setStop(1)
-    selectRandomImage()
+  setStop(1)
 
   }
 else if(input == 'p'){
@@ -122,7 +128,6 @@ function stopNow(){
 
 function collectLabels(){
   setAllLabels([allLabels,input]);
-  counterSpeed()
   saveData()
 }
 
@@ -131,23 +136,19 @@ function getID(){
 }
 
 function start(){
-  getID()
-  console.log(ID)
-  if(ID==''){
-    alert("Please provide your name to start, it will be your labeller ID.")
-    getID()
-  }
-  else {
+
     selectRandomImage()
     setStop(1)
     placeCursor()
   }
  
-  } 
-
+  
   function placeCursor(){
-    const input = document.querySelector("input")
-    input.focus()}
+    const input = document.querySelector("input");
+    input.focus();
+    input.select();
+  
+  }
 
   return (
 <div className={styles.container}>
@@ -159,15 +160,10 @@ function start(){
       1414=707+707
     </h1>
   <center>
-    <div className={styles.leftImage}>
-      <Image src={`/images/${index+1}.png`} width={size} height={size} alt="nextNumber"  />
-    </div>
     <div className={centerColor}>
       <Image src={`/images/${index}.png`} width={size} height={size} alt="nowNumber"  />
     </div>
-    <div className={styles.rightImage}>
-      <Image src={`/images/${index-1}.png`} width={size} height={size} alt="prevNumber"  />
-    </div>
+
   </center>
    
 
@@ -176,25 +172,26 @@ function start(){
     
     <label>
       
-        <input value={input}
+        <input value={input} autoFocus
         onInput={checkSpeed}
         onChange={collectLabels}
         />
     </label>
   
-    
-    {/* <button onClick={start}>START</button> */}
+{/*     
+    <button onClick={start}>START</button> */}
    
     
     {/* <button onClick={fetchData}> fetchData</button>
     <button onClick={saveData}> saveData</button> */}
 
     <ul>
-  <li>s - start</li>
+  <li>s - start (in {countDown} sec)</li>
   <li>p - pause</li>
   <li>u - speed +</li>
   <li>d - speed -</li>
     </ul>
+   
  
 {/*    
     <p>newLabels: {allLabels.map(x=>x)}</p> */}
