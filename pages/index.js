@@ -17,10 +17,11 @@ export default function labelMachine({size=150}) {
   const [score,setScore] = useState(0)
   const [ID,setID] = useState("")
   const [countDown, setCountDown] = useState(3);
+
   
   const correctLabel = correctLabels[index]
 
-  const counterRef = useRef(0);
+  
  
    
   const keyPress = useCallback((e) => {
@@ -55,7 +56,7 @@ return () => {
     {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
-        start();
+        selectRandomImage();
         setCountDown(0);
         setCounter((c)=> c+1);
         
@@ -64,7 +65,7 @@ return () => {
         }
       
         if (score>10){
-          setSpeed(1500)
+          setSpeed(1200)
           setScore(0)
         }  
       }
@@ -95,31 +96,36 @@ return () => {
       console.log(data);
   }
 
+  function StartStopMenu(){
+    if (countDown==0){
+        return (
+            <ul>
+          <li>p - pause</li>
+          <li>u - speed +</li>
+          <li>d - speed -</li>
+            </ul>);
+    }
+    return (
+        <ul>
+        <li>s - start in {countDown}</li>
+        <li>u - speed +</li>
+        <li>d - speed -</li>
+        </ul>);
+  }
+
+
 function selectRandomImage(){
   let rand = Math.floor(Math.random() * 60000);
   setIndex(rand)
 }
 
-function counterSpeed(){
-  if (counter==2){
-    setSpeed(speed - 200)
-  }
-  else if (counter>50 && counter<100){
-    setSpeed(900)
-  }
-  else if (counter>150){
-    setSpeed(1000)
-  }
-
-}
-  
 function checkSpeed(){
 if(input == 's'){
   setStop(1)
-
   }
 else if(input == 'p'){
-    setStop(0)}
+    setStop(0)
+  }
 else if(input == 'u'){
   setSpeed(speed-100)}
 else if(input== 'd'){
@@ -133,11 +139,6 @@ else if(input!=correctLabel){
 else if (input==correctLabel){
   
   setCenterColor(styles.centerImageBlue)}
-
-}
-
-function stopNow(){
-  setStop(0)
 }
 
 function collectLabels(){
@@ -145,25 +146,7 @@ function collectLabels(){
   saveData()
 }
 
-function getID(){
-  setID(window.prompt("What is your name?"))
-}
-
-function start(){
-
-    selectRandomImage()
-    setStop(1)
-    placeCursor()
-  }
  
-  
-  function placeCursor(){
-    const input = document.querySelector("input");
-    input.focus();
-    input.select();
-  
-  }
-
   return (
 <div className={styles.container}>
     <Head>
@@ -177,40 +160,19 @@ function start(){
     <div className={centerColor}>
       <Image src={`/images/${index}.png`} width={size} height={size} alt="nowNumber"  />
     </div>
-
-  </center>
+ </center>
    
-
   <hr />
   
-    
     <label>
-      
         <input value={input} autoFocus
         onInput={checkSpeed}
         onChange={collectLabels}
         />
     </label>
   
-{/*     
-    <button onClick={start}>START</button> */}
-   
-    
-    {/* <button onClick={fetchData}> fetchData</button>
-    <button onClick={saveData}> saveData</button> */}
-
-    <ul>
-  <li>s - start (in {countDown} sec)</li>
-  <li>p - pause</li>
-  <li>u - speed +</li>
-  <li>d - speed -</li>
-    </ul>
-   
- 
-{/*    
-    <p>newLabels: {allLabels.map(x=>x)}</p> */}
-  
-      <p>f=5, h=6</p>
+<StartStopMenu />
+       <p>f=5, h=6</p>
       <p>Velocity: {speed} ms</p>
      
      
