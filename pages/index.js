@@ -5,7 +5,7 @@ import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
 
 
-export default function labelMachine({size=28}) {
+export default function labelMachine({size=150}) {
  
   const [index, setIndex] = useState(1);
   const [speed, setSpeed] = useState(1200);
