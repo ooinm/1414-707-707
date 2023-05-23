@@ -5,7 +5,7 @@ import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
 
 
-export default function labelMachine({size=150}) {
+export default function labelMachine({size=28}) {
  
   const [index, setIndex] = useState(1);
   const [speed, setSpeed] = useState(1200);
@@ -14,35 +14,32 @@ export default function labelMachine({size=150}) {
   const [input,setInput] = useState("");
   const [allLabels, setAllLabels] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [score,setScore] = useState(0)
+  const [score,setScore] = useState(3)
   const [ID,setID] = useState("")
   const [countDown, setCountDown] = useState(3);
 
   
   const correctLabel = correctLabels[index]
 
-  
- 
-   
   const keyPress = useCallback((e) => {
-let k=e.key
-if (k=='0'||k=='1'||k=='2'||k=='3'||k=='4'||k=='5'||k=='6'
-  ||k=='7'||k=='8'||k=='9'||k=='s'||k=='p'||k=='u'||k=='d'){
-  setInput(k);}
-else if (k == 'f'){
-        setInput(5);}
-else if (k == 'h'){
-          setInput(6);}
-else {
-setInput('-')}       
-  }, []);
+    let k=e.key
+    if (k=='0'||k=='1'||k=='2'||k=='3'||k=='4'||k=='5'||k=='6'
+      ||k=='7'||k=='8'||k=='9'||k=='s'||k=='p'||k=='u'||k=='d'){
+      setInput(k);}
+    else if (k == 'f'){
+            setInput(5);}
+    else if (k == 'h'){
+            setInput(6);}
+    else {
+      setInput('-')}       
+    }, []);
 
   useEffect(() => { 
     // add and remove event listener
-    document.addEventListener('keydown', keyPress);
-return () => {
-      document.removeEventListener('keydown', keyPress);
-    };
+   document.addEventListener('keydown', keyPress);
+   //return () => {
+   //  document.removeEventListener('keydown', keyPress);
+   //};
   }, [keyPress]);
 
  
@@ -60,13 +57,13 @@ return () => {
         setCountDown(0);
         setCounter((c)=> c+1);
         
-        if (speed>900){
+        if (speed>500){
           setSpeed(speed -5)
         }
       
-        if (score>10){
+        if (score>6){
           setSpeed(1200)
-          setScore(0)
+          setScore(3)
         }  
       }
 
@@ -127,7 +124,10 @@ else if(input == 'p'){
     setStop(0)
   }
 else if(input == 'u'){
-  setSpeed(speed-100)}
+  if (speed > 100){
+    setSpeed(speed-100)
+  }
+}
 else if(input== 'd'){
     setSpeed(speed+100);
     }
@@ -137,7 +137,11 @@ else if(input!=correctLabel){
 
   setCenterColor(styles.centerImageRed)}
 else if (input==correctLabel){
-  
+  setScore(score-1)
+  if (score < 0)
+  {  
+    setScore(0)
+  }
   setCenterColor(styles.centerImageBlue)}
 }
 
