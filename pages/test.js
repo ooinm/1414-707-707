@@ -54,7 +54,9 @@ export default function labelMachine({size=150}) {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         collectLabels()
+        console.timeEnd("plaatje tijd");
         selectRandomImage();
+        console.time("plaatje tijd");
         setCountDown(0);
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
