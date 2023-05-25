@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css';
 export default function labelMachine({size=150}) {
  
   const [index, setIndex] = useState(1);
-  const [speed, setSpeed] = useState(1200);
+  const [speed, setSpeed] = useState(300);
   const [stop, setStop] = useState(0);
   const [centerColor, setCenterColor] = useState(styles.centerImageBlack)
   const [input,setInput] = useState("");
@@ -58,28 +58,18 @@ export default function labelMachine({size=150}) {
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
         collectLabels()
-            if(input!=correctLabel){
-              setScore(score+1)
-              setCenterColor(styles.centerImageRed)
-            }
-            if (input==correctLabel){
-                  setScore(score-1)
-                  if (score < 0)
-                  {  
-                    setScore(0)
-                  }
-                  setCenterColor(styles.centerImageBlue)
-                }
+        checkSpeed()
+    
         
-        if (speed>500){
-          setSpeed(speed -5)
-        }
+    //     if (speed>500){
+    //       setSpeed(speed -5)
+    //     }
       
-        if (score>6){
-          setSpeed(1200)
-          setScore(3)
-        }  
-      }
+    //     if (score>6){
+    //       setSpeed(1200)
+    //       setScore(3)
+    //     }  
+    }
 
      }
      else {
@@ -150,19 +140,19 @@ else if(input == 'u'){
 else if(input== 'd'){
     setSpeed(speed+100);
     }
-// else if(input!=correctLabel){
+else if(input!=correctLabel){
  
-//   setScore(score+1)
+  setScore(score+1)
 
-//   setCenterColor(styles.centerImageRed)
-// }
-// else if (input==correctLabel){
-//   setScore(score-1)
-//   if (score < 0)
-//   {  
-//     setScore(0)
-//   }
-//   setCenterColor(styles.centerImageBlue)}
+  setCenterColor(styles.centerImageRed)
+}
+else if (input==correctLabel){
+  setScore(score-1)
+  if (score < 0)
+  {  
+    setScore(0)
+  }
+  setCenterColor(styles.centerImageBlue)}
 }
 
 function collectLabels(){
@@ -189,7 +179,7 @@ function collectLabels(){
   <hr />
   
     <label>
-        <input value={input} 
+        <input value={input} readOnly
     
         />
     </label>
