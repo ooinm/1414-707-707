@@ -125,7 +125,7 @@ export default function labelMachine({size=150}) {
 
 function start(){
     setID(window.prompt("What is your name?"))
-    placeCursor()
+    // placeCursor()
     setStop(1)
     
   }
@@ -188,11 +188,11 @@ function collectLabels(){
    
   <hr />
   
-    <label>
+    {/* <label>
         <input value={input} readOnly
     
         />
-    </label>
+    </label> */}
     <hr />
          
     <button onClick={start}>START</button>
