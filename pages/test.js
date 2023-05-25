@@ -18,8 +18,8 @@ export default function labelMachine({size=150}) {
   const [ID,setID] = useState("")
   const [countDown, setCountDown] = useState(3);
 
-  
   const correctLabel = correctLabels[index]
+ 
 
   const keyPress = useCallback((e) => {
     let k=e.key
@@ -46,11 +46,43 @@ export default function labelMachine({size=150}) {
   
   
   useEffect(() => {
+
+    function checkSpeed(){
+      if(input == 's'){
+        setStop(1)
+        }
+      else if(input == 'p'){
+          setStop(0)
+        }
+      else if(input == 'u'){
+        if (speed > 100){
+          setSpeed(speed-100)
+        }
+      }
+      else if(input== 'd'){
+          setSpeed(speed+100);
+          }
+      else if(input!=correctLabel){
+       
+        setScore(score+1)
+      
+        setCenterColor(styles.centerImageRed)
+      }
+      else if (input==correctLabel){
+        setScore(score-1)
+        if (score < 0)
+        {  
+          setScore(0)
+        }
+        setCenterColor(styles.centerImageBlue)}
+      }
    
+    
     const interval = setInterval(() => {
      
       if (stop === 1)
     {
+ 
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         collectLabels()
@@ -59,8 +91,9 @@ export default function labelMachine({size=150}) {
         console.time("plaatje tijd");
         setCountDown(0);
         setCounter((c)=> c+1);
-        setCenterColor(styles.centerImageBlack)
-        checkSpeed()
+        setCenterColor(styles.centerImageBlack);
+        checkSpeed();
+        
     
         
         if (speed>500){
@@ -79,7 +112,7 @@ export default function labelMachine({size=150}) {
      }
     }, speed);
     return () => clearInterval(interval);
-  }, [stop,speed,counter,countDown,score,input,correctLabel]);
+  }, [stop,speed,counter,countDown,score,correctLabel]);
   
   const fetchData = async () => {
     const response = await fetch('/api/labels')
@@ -135,35 +168,7 @@ function selectRandomImage(){
   setIndex(rand)
 }
 
-function checkSpeed(){
-if(input == 's'){
-  setStop(1)
-  }
-else if(input == 'p'){
-    setStop(0)
-  }
-else if(input == 'u'){
-  if (speed > 100){
-    setSpeed(speed-100)
-  }
-}
-else if(input== 'd'){
-    setSpeed(speed+100);
-    }
-else if(input!=correctLabel){
- 
-  setScore(score+1)
 
-  setCenterColor(styles.centerImageRed)
-}
-else if (input==correctLabel){
-  setScore(score-1)
-  if (score < 0)
-  {  
-    setScore(0)
-  }
-  setCenterColor(styles.centerImageBlue)}
-}
 
 function collectLabels(){
   setAllLabels([allLabels,input]);
