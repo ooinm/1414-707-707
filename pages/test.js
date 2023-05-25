@@ -123,7 +123,12 @@ export default function labelMachine({size=150}) {
         <li>d - speed -</li>
         </ul>);
   }
+function start(){
 
+   
+    setStop(1)
+    
+  }
 
 function selectRandomImage(){
   let rand = Math.floor(Math.random() * 60000);
@@ -185,9 +190,12 @@ function collectLabels(){
   
     <label>
         <input value={input} 
-        onInput={checkSpeed}
+    
         />
     </label>
+         
+    <button onClick={start}>START</button>
+   
   
 <StartStopMenu />
        <p>f=5, h=6</p>
