@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css';
 export default function labelMachine({size=150}) {
  
   const [index, setIndex] = useState(1);
-  const [speed, setSpeed] = useState(300);
+  const [speed, setSpeed] = useState(1200);
   const [stop, setStop] = useState(0);
   const [centerColor, setCenterColor] = useState(styles.centerImageBlack)
   const [input,setInput] = useState("");
@@ -53,22 +53,22 @@ export default function labelMachine({size=150}) {
     {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
+        collectLabels()
         selectRandomImage();
         setCountDown(0);
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
-        collectLabels()
         checkSpeed()
     
         
-    //     if (speed>500){
-    //       setSpeed(speed -5)
-    //     }
+        if (speed>500){
+          setSpeed(speed -5)
+        }
       
-    //     if (score>6){
-    //       setSpeed(1200)
-    //       setScore(3)
-    //     }  
+        if (score>6){
+          setSpeed(1200)
+          setScore(3)
+        }  
     }
 
      }
@@ -113,9 +113,17 @@ export default function labelMachine({size=150}) {
         <li>d - speed -</li>
         </ul>);
   }
-function start(){
 
-   
+  function placeCursor(){
+    const input = document.querySelector("input");
+    input.focus();
+    input.select();
+  }
+
+
+function start(){
+    setID(window.prompt("What is your name?"))
+    placeCursor()
     setStop(1)
     
   }
@@ -183,8 +191,11 @@ function collectLabels(){
     
         />
     </label>
+    <hr />
          
     <button onClick={start}>START</button>
+          
+
    
   
 <StartStopMenu />
