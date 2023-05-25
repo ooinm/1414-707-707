@@ -47,42 +47,13 @@ export default function labelMachine({size=150}) {
   
   useEffect(() => {
 
-    function checkSpeed(){
-      if(input == 's'){
-        setStop(1)
-        }
-      else if(input == 'p'){
-          setStop(0)
-        }
-      else if(input == 'u'){
-        if (speed > 100){
-          setSpeed(speed-100)
-        }
-      }
-      else if(input== 'd'){
-          setSpeed(speed+100);
-          }
-      else if(input!=correctLabel){
-       
-        setScore(score+1)
-      
-        setCenterColor(styles.centerImageRed)
-      }
-      else if (input==correctLabel){
-        setScore(score-1)
-        if (score < 0)
-        {  
-          setScore(0)
-        }
-        setCenterColor(styles.centerImageBlue)}
-      }
+   
    
     
     const interval = setInterval(() => {
      
       if (stop === 1)
     {
- 
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         collectLabels()
@@ -91,10 +62,22 @@ export default function labelMachine({size=150}) {
         console.time("plaatje tijd");
         setCountDown(0);
         setCounter((c)=> c+1);
+        console.log(input)
         setCenterColor(styles.centerImageBlack);
-        checkSpeed();
-        
-    
+        if(input!=correctLabel){
+          setScore(score+1)
+          setCenterColor(styles.centerImageRed)
+        }
+        if (input==correctLabel){
+              setScore(score-1)
+              if (score < 0)
+              {  
+                setScore(0)
+              }
+              setCenterColor(styles.centerImageBlue)
+            }
+    checkSpeed()
+     
         
         if (speed>500){
           setSpeed(speed -5)
@@ -112,7 +95,7 @@ export default function labelMachine({size=150}) {
      }
     }, speed);
     return () => clearInterval(interval);
-  }, [stop,speed,counter,countDown,score,correctLabel]);
+  }, [stop,speed,counter,countDown,score,correctLabel,input]);
   
   const fetchData = async () => {
     const response = await fetch('/api/labels')
@@ -131,6 +114,36 @@ export default function labelMachine({size=150}) {
       const data = await response.json();
       console.log(data);
   }
+
+  function checkSpeed(){
+    if(input == 's'){
+      setStop(1)
+      }
+    else if(input == 'p'){
+        setStop(0)
+      }
+    else if(input == 'u'){
+      if (speed > 100){
+        setSpeed(speed-100)
+      }
+    }
+    else if(input== 'd'){
+        setSpeed(speed+100);
+        }
+    else if(input!=correctLabel){
+     
+      setScore(score+1)
+    
+      setCenterColor(styles.centerImageRed)
+    }
+    else if (input==correctLabel){
+      setScore(score-1)
+      if (score < 0)
+      {  
+        setScore(0)
+      }
+      setCenterColor(styles.centerImageBlue)}
+    }
 
   function StartStopMenu(){
     if (countDown==0){
@@ -192,12 +205,12 @@ function collectLabels(){
  </center>
    
   <hr />
-  
-    {/* <label>
+   
+{/* <label>
         <input value={input} readOnly
     
         />
-    </label> */}
+    </label>  */}
     <hr />
          
     <button onClick={start}>START</button>

@@ -53,7 +53,10 @@ export default function labelMachine({size=150}) {
     {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
+        console.timeEnd("plaatje tijd");
         selectRandomImage();
+        checkSpeed();
+        console.time("plaatje tijd");
         setCountDown(0);
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
@@ -74,7 +77,7 @@ export default function labelMachine({size=150}) {
      }
     }, speed);
     return () => clearInterval(interval);
-  }, [stop,speed,counter,countDown,score]);
+  }, [stop,speed,counter,countDown,score,input]);
   
   const fetchData = async () => {
     const response = await fetch('/api/labels')
@@ -171,7 +174,7 @@ function collectLabels(){
   <hr />
   
     <label>
-        <input value={input} autoFocus
+        <input value={input}
         onInput={checkSpeed}
         onChange={collectLabels}
         />
