@@ -56,6 +56,7 @@ export default function labelMachine({size=150}) {
         selectRandomImage();
         setCountDown(0);
         setCounter((c)=> c+1);
+        setCenterColor(styles.centerImageBlack)
         
         if (speed>500){
           setSpeed(speed -5)
@@ -135,7 +136,8 @@ else if(input!=correctLabel){
  
   setScore(score+1)
 
-  setCenterColor(styles.centerImageRed)}
+  setCenterColor(styles.centerImageRed)
+}
 else if (input==correctLabel){
   setScore(score-1)
   if (score < 0)
