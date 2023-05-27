@@ -37,9 +37,9 @@ export default function labelMachine({size=150}) {
   useEffect(() => { 
     // add and remove event listener
    document.addEventListener('keydown', keyPress);
-   //return () => {
-   //  document.removeEventListener('keydown', keyPress);
-   //};
+   return () => {
+    document.removeEventListener('keydown', keyPress);
+   };
   }, [keyPress]);
 
  
@@ -56,9 +56,19 @@ export default function labelMachine({size=150}) {
         console.timeEnd("plaatje tijd");
         selectRandomImage();
         console.time("plaatje tijd");
+        console.log(score)
         setCountDown(0);
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
+
+        if (speed>500){
+          setSpeed(speed -5)
+        }
+
+        if (score>6){
+          setSpeed(1200)
+          setScore(3)
+        }  
         
        
       }
@@ -142,14 +152,8 @@ else if (input==correctLabel){
   setCenterColor(styles.centerImageBlue)
 }
 
-else if (speed>500){
-  setSpeed(speed -5)
-}
 
-else if (score>6){
-  setSpeed(1200)
-  setScore(3)
-}  
+
 
 
 }
