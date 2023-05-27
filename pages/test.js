@@ -14,7 +14,7 @@ export default function labelMachine({size=150}) {
   const [input,setInput] = useState("");
   const [allLabels, setAllLabels] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [score,setScore] = useState(3)
+  const [score,setScore] = useState(1)
   const [ID,setID] = useState("")
   const [countDown, setCountDown] = useState(3);
 
@@ -61,13 +61,13 @@ export default function labelMachine({size=150}) {
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
 
-        if (speed>500){
-          setSpeed(speed -5)
+        if (speed>800){
+          setSpeed(speed - 5)
         }
 
-        if (score>6){
-          setSpeed(1200)
-          setScore(3)
+        if (score>1){
+          setSpeed(speed + 50)
+          setScore(1)
         }  
         
        
