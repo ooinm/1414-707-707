@@ -122,8 +122,20 @@ function selectRandomImage(){
   setIndex(rand)
 }
 
+
+ 
+  
+  function placeCursor(){
+    const input = document.querySelector("input");
+    input.focus();
+    input.select();
+  }
+
 function checkSpeed(){
 if(input == 's'){
+  setID(window.prompt("What is your name?"))
+  placeCursor()
+  setInput('')
   setStop(1)
   }
 else if(input == 'p'){
