@@ -61,7 +61,7 @@ export default function labelMachine({size=150}) {
         setCounter((c)=> c+1);
         setCenterColor(styles.centerImageBlack)
 
-        if (speed>800){
+        if (speed>1000){
           setSpeed(speed - 5)
         }
 
