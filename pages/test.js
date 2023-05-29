@@ -3,6 +3,7 @@ import { useState,useEffect, useRef,useCallback} from 'react';
 import Image from 'next/image';
 import {correctLabels} from '../correctLabels.js';
 import styles from '../styles/Home.module.css';
+import Logo from './logo.js';
 
 
 export default function labelMachine({size=150}) {
@@ -182,9 +183,7 @@ function collectLabels(){
       <title>1414=707+707</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <h1 className={styles.title}>
-      1414=707+707
-    </h1>
+    <Logo/>
   <center>
     <div className={centerColor}>
       <Image src={`/images/${index}.png`} width={size} height={size} alt="nowNumber"  />
