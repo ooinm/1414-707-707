@@ -207,7 +207,7 @@ function collectLabels(){
     <Logo/>
   <center>
     <div className={centerColor}>
-      <Image src={`/images/${index}.png`} width={size} height={size} alt="nowNumber"  />
+      <Image src={`/big_images/${index}.png`} width={size} height={size} alt="nowNumber"  />
     </div>
  </center>
    
