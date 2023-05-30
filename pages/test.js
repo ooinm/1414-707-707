@@ -131,13 +131,17 @@ const randWithoutDouble = async () => {
      {
       indexArray.push(data[i]['index']);
      }
-    console.log(indexArray); 
     let rand = Math.floor(Math.random() * 60000);
     const mySet =new Set(indexArray);
     if (mySet.has(rand)== false){
       setIndex(rand);
     }
-    else randWithoutDouble();
+    else 
+    {
+      console.log("already labelled")
+      randWithoutDouble();
+    }
+
   
 }
 
