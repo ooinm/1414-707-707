@@ -55,7 +55,8 @@ export default function labelMachine({size=150}) {
       setCountDown((cD)=> cD-1);
       if (countDown==0){
         console.timeEnd("plaatje tijd");
-        selectRandomImage();
+        // selectRandomImage();
+        randWithoutDouble();
         console.time("plaatje tijd");
         console.log(score)
         setCountDown(0);
@@ -122,7 +123,23 @@ function selectRandomImage(){
   let rand = Math.floor(Math.random() * 60000);
   setIndex(rand)
 }
-
+const randWithoutDouble = async () => {
+  const response = await fetch('/api/labels')
+  const data = await response.json();
+    let indexArray = [];
+      for (let i = 0; i < data.length; i++)
+     {
+      indexArray.push(data[i]['index']);
+     }
+    console.log(indexArray); 
+    let rand = Math.floor(Math.random() * 60000);
+    const mySet =new Set(indexArray);
+    if (mySet.has(rand)== false){
+      setIndex(rand);
+    }
+    else randWithoutDouble();
+  
+}
 
  
   
