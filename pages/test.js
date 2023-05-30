@@ -154,7 +154,7 @@ else if(input!=correctLabel){
  
   setScore(score+1)
 
-  setCenterColor(styles.centerImageRed)
+  //setCenterColor(styles.centerImageRed)
 }
 else if (input==correctLabel){
   setScore(score-1)
@@ -162,7 +162,7 @@ else if (input==correctLabel){
   {  
     setScore(0)
   }
-  setCenterColor(styles.centerImageBlue)
+  //setCenterColor(styles.centerImageBlue)
 }
 
 
