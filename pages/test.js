@@ -105,6 +105,7 @@ export default function labelMachine({size=150}) {
     if (countDown==0){
         return (
             <ul>
+           <li>{ID} labelled {counter} labels today!</li>   
           <li>p - pause</li>
           <li>u - speed +</li>
           <li>d - speed -</li>
