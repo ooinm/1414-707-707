@@ -140,8 +140,6 @@ const randWithoutDouble = async () => {
   setIndex(rand);
 }
 
- 
-  
   function placeCursor(){
     const input = document.querySelector("input");
     input.focus();
