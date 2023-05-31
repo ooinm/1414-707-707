@@ -132,7 +132,7 @@ const randWithoutDouble = async () => {
      {
       labelledImages.push(data[i]['index']);
      }
-    let rand = Math.floor(Math.random() * 100);
+    let rand = Math.floor(Math.random() * 60000);
    
     // const mySet =new Set(indexArray);
     if (labelledImages.includes(rand)== false){
