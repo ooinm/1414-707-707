@@ -127,23 +127,17 @@ function selectRandomImage(){
 const randWithoutDouble = async () => {
   const response = await fetch('/api/labels')
   const data = await response.json();
-    let indexArray = [];
-      for (let i = 0; i < data.length; i++)
-     {
-      indexArray.push(data[i]['index']);
-     }
-    let rand = Math.floor(Math.random() * 60000);
-    const mySet =new Set(indexArray);
-    if (mySet.has(rand)== false){
-      setIndex(rand);
-    }
-    else 
-    {
-      console.log("already labelled")
-      randWithoutDouble();
-    }
-
-  
+  let indexSet = new Set();
+  for (let i = 0; i < data.length; i++)
+  {
+    indexSet.add(data[i]['index']);
+  }
+  let rand = 0;
+  do
+  {
+    rand = Math.floor(Math.random() * 60000);
+  } while (indexSet.has(rand));
+  setIndex(rand);
 }
 
  
