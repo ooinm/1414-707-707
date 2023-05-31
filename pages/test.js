@@ -127,14 +127,15 @@ function selectRandomImage(){
 const randWithoutDouble = async () => {
   const response = await fetch('/api/labels')
   const data = await response.json();
-    let indexArray = [];
+    let labelledImages = [];
       for (let i = 0; i < data.length; i++)
      {
-      indexArray.push(data[i]['index']);
+      labelledImages.push(data[i]['index']);
      }
-    let rand = Math.floor(Math.random() * 60000);
-    const mySet =new Set(indexArray);
-    if (mySet.has(rand)== false){
+    let rand = Math.floor(Math.random() * 100);
+   
+    // const mySet =new Set(indexArray);
+    if (labelledImages.includes(rand)== false){
       setIndex(rand);
     }
     else 
