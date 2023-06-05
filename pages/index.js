@@ -28,9 +28,9 @@ export default function labelMachine({size=150}) {
       ||k=='7'||k=='8'||k=='9'||k=='s'||k=='p'||k=='u'||k=='d'){
       setInput(k);}
     else if (k == 'f'){
-            setInput(5);}
+            setInput('5');}
     else if (k == 'h'){
-            setInput(6);}
+            setInput('6');}
     else {
       setInput('-')}
     }, []);
