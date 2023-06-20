@@ -8,7 +8,7 @@ export default function Logo() {
 
     <h1 className={styles.title}>
 
-    <Image src='/images/416.png' width='28' height='25' alt="1" />
+    <Image src='/images/416.png' width='25' height='25' alt="1" />
     <Image src='/images/275.png' width='25' height='25' alt="4" />
     <Image src='/images/224.png' width='25' height='25' alt="1" />
     <Image src='/images/412.png' width='25' height='25' alt="4" />

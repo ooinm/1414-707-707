@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css';
 import Logo from './logo.js';
 
 
-export default function labelMachine({size=150}) {
+export default function labelMachine({size=250}) {
 
   const [index, setIndex] = useState(1);
   const [speed, setSpeed] = useState(1200);

@@ -11,8 +11,8 @@
 
 .centerImageBlue {
   float:left;
-  width:150px;
-  height:155px;
+  width:250px;
+  height:255px;
   background-color:rgb(25, 0, 255);
   margin-right:20px; 
 
@@ -20,15 +20,15 @@
 
 .centerImageRed {
   float:left;
-  width:150px;
-  height:155px;
+  width:250px;
+  height:255px;
   background-color:rgb(255, 0, 0);
   margin-right:20px
 }
 .centerImageBlack {
   float:left;
-  width:150px;
-  height:155px;
+  width:250px;
+  height:255px;
   background-color:rgb(3, 3, 3);
   margin-right:20px;
   
