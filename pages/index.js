@@ -135,7 +135,7 @@ const randWithoutDouble = async () => {
   let rand = 0;
   do
   {
-    rand = Math.floor(Math.random() * 60000);
+    rand = Math.floor(Math.random() * 7000);
   } while (indexSet.has(rand));
   setIndex(rand);
 }
@@ -200,7 +200,7 @@ function collectLabels(){
     <Logo/>
   <center>
     <div className={centerColor}>
-      <Image src={`/big_images/${index}.png`} width={size} height={size} alt="nowNumber"  />
+      <Image src={`/big_images_7000_subset/${index}.png`} width={size} height={size} alt="nowNumber"  />
     </div>
  </center>
 
