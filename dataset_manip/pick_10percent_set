@@ -1,0 +1,22 @@
+
+# very hacky (sh) script to pick a dataset, 6000 from train, 1000 from test
+
+seq 0 1 59999 | shuf | head -n 6000 > train_indices
+seq 60000 1 69999 | shuf | head -n 1000 > test_indices
+mkdir ../public/images_7000_subset
+sleep .1
+
+awk '{printf("cp trainset/%s.png ../public/images_7000_subset/%s.png\n",$1, (NR-1))}' train_indices >  com
+sleep .1
+awk '{printf("cp testset/%s.png ../public/images_7000_subset/%s.png\n",$1, (NR-1+6000))}' test_indices >>  com
+sleep .1
+bash ./com
+python gather_labels.py > ../correctLabels_7000_subset.js
+
+#cd ../public
+#  mkdir big_images_7000_subset
+#  cd big_images_7000_subset
+#    cp ../images_7000_subset/* .
+#    mogrify -geometry 250x250 *.png
+#  cd ..
+#cd ../dataset_manip
