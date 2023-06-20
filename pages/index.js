@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState,useEffect, useRef,useCallback} from 'react';
 import Image from 'next/image';
-import {correctLabels} from '../correctLabels.js';
+import {correctLabels} from '../correctLabels_7000_subset.js';
 import styles from '../styles/Home.module.css';
 import Logo from './logo.js';
 
